@@ -1,0 +1,19 @@
+{% load staticfiles i18n %}
+<div reply-id="{{reply.id}}">
+<div class="top right">
+    <span class="date b-r-dotted">{{ reply.get_date }}</span>
+    {% if is_owner or current_user.id == reply.user.id %}
+        <button message-id="{{reply.id}}" class="btn-delete btn-danger btn btn-mini" wall-type="{{reply.wall_type}}" delete-text="{% trans 'Are you sure to delete this message?' %}">
+            {% trans "Delete" %}
+        </button>
+    {% endif %}
+</div>
+<div class="content-panel clear">
+    <img class="profile-img small" src="{{reply.user.get_image_src}}" alt="">
+    <div data-profile-url="{% url 'dashboard' reply.user.id %}" class="profile-mask tooltip-user" message-user-id="{{reply.user.id}}"></div>
+    <div class="content">
+        {{ reply.content }}
+        <div class="arrow-user"></div>
+    </div>
+</div>
+</div>

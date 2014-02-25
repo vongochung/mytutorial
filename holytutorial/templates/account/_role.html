@@ -1,0 +1,7 @@
+<div class="sport_list">
+	{% for role in roles %}
+	<div class='one-role'>
+		<button id="{{ role.id }}" class="{% if my_role ==  role.id %}btn btn-orange{% else %}btn btn-sport{% endif %}" role = "btn-role" >{{ role.name }}</button>
+	</div>	
+	{% endfor %}
+</div>

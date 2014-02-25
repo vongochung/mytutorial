@@ -1,0 +1,6 @@
+{% load staticfiles i18n %}
+{% block content %}
+{% for message in messages %}
+    {% include 'message/_message.html' %}
+{% endfor %}
+{% endblock %}

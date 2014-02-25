@@ -1,0 +1,5 @@
+{
+    "ret_code": "{{ ret_code }}",
+    "message": "{{ message }}",
+    "result": {{ result|safe }}
+}

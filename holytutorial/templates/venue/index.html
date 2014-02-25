@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% load staticfiles i18n %}
+
+{% block head %}
+    <link href="{% static 'css/venue.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block left_menu %}
+    <li data-url="{% url 'get_all_venues' %}" data-callback="init_map"><a id="left-menu-all-venue" href="#" class="active"><i class="icon-th"></i> {% trans "All Venues" %}</a></li>
+    <li data-url="{% url 'get_my_venues' %}"><a id="left-menu-my-venues" href="#" ><i class="icon-th"></i> {% trans "My Venues" %}</a></li>
+    <li data-url="{% url 'get_favourite' %}"><a id="left-menu-favourite-venues" href="#"><i class="icon-th"></i> {% trans "Favourite Venues" %}</a></li>
+{% endblock %}
+
+{% block content %}
+
+<div id="main-content">
+    {% include 'venue/_map.html' %}
+    <div id="list-venue-map" class="list-map"></div>
+</div>
+<div id="create-venue-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>{% trans "Create venue" %}</h3>
+    </div>
+    <div id="create-venue" class="modal-body">
+
+    </div>
+    <div class="modal-footer">
+        <button id="btn-save-venue" class="btn">Save</button>
+    </div>
+</div>
+{% endblock %}
+{% block js %}
+    <script src="{% static 'js/mygmap.js' %}"></script>
+    <script src="{% static 'js/venue.js' %}"></script>
+    <script src="{% static 'js/dashboard.js' %}"></script>
+{% endblock %}

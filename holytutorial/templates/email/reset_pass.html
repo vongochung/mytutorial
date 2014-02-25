@@ -1,0 +1,11 @@
+{% extends 'email/email_template.html' %}
+{% load staticfiles i18n%}
+
+{% block title %}
+    {% trans "Reset your password!" %}
+{% endblock %}
+{% block content %}
+    {% trans "Go to the following link to reset your password." %}
+    <br/>
+    <a href="{{ default_url }}{% url 'reset_password' id code %}">{% trans "Click here !" %}</a>
+{% endblock %}

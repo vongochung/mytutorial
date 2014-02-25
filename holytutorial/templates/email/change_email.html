@@ -1,0 +1,11 @@
+{% extends 'email/email_template.html' %}
+{% load staticfiles i18n%}
+
+{% block title %}
+    {% trans 'WiDoo Sport Change Email' %}
+{% endblock %}
+{% block content %}
+    {% trans 'Please go to the following link to confirm this email !' %}
+    <br/>
+    <a href="{{ default_url }}{% url 'change_email' id code %}">{% trans "Click here !" %}</a>
+{% endblock %}

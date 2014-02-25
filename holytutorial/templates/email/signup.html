@@ -1,0 +1,8 @@
+{% extends 'email/email_template.html' %}
+{% load staticfiles i18n%}
+
+{% block content %}
+    {% trans "Thanks to signup WiDoo Sport!" %}
+    <br/>
+    <a href="{{ default_url }}{% url 'active_player' id code %}">{% trans "Click here to signin!" %}</a>
+{% endblock %}

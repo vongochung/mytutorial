@@ -1,0 +1,170 @@
+h1 {
+
+}
+
+input {
+    width: 290px;
+}
+
+input.input-block-level {
+    height: 40px;
+}
+
+.btn {
+
+
+}
+
+h2 {
+    margin-bottom: 30px;
+    border-bottom: 1px dotted #E5E5E5;
+    text-align: center;
+    height: 60px;
+    padding-top: 12px;
+}
+
+.flipper {
+    margin: auto;
+    text-align: center;
+}
+
+.flipper form, .flipper .success {
+    margin: auto;
+    width: 300px;
+}
+
+.flipper, .flipper .face {
+    width: 365px;
+}
+
+.flipper, .face {
+    height: 440px;
+}
+
+.flipper .success {
+    text-align: left;
+}
+
+.fb-connect {
+    margin-top: 30px;
+}
+
+.card .face, #intro .face {
+    background-color: #fefefe;
+}
+
+/* Flip Effect */
+
+.flipper {
+    z-index: 1;
+    -webkit-perspective: 1000px;
+    -moz-perspective: 1000px;
+    -ms-perspective: 1000px;
+}
+
+.card {
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    
+    -webkit-transition: all .4s ease-in-out;
+    -moz-transition: all .4s ease-in-out;
+    -ms-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.card .face {
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    position: absolute;
+}
+
+.card .face.back {
+    display: none;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.card.flipping, .card .face.back {
+    -webkit-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+    -ms-transform: rotateY(180deg);
+}
+
+.card.landscape.flipping, .card.landscape .face.back {
+    -webkit-transform: rotateX(180deg);
+    transform: rotateX(180deg);
+}
+
+.csstransforms3d .face.back {
+    display: block;
+}
+
+/* End Flip Effect */
+
+.btn-success {
+    margin-bottom: 10px;
+}
+.forgot-pass {
+	margin-top: 10px;
+}
+.loading{
+	text-align: center;
+}
+
+#list-intro {
+    text-align: left;
+    font-size: 21px;
+    line-height: 32px;
+    margin: 15px;
+}
+
+#list-intro li {
+    padding-bottom: 20px;
+}
+
+#intro {
+    width: 100%;
+}
+
+.extensible-bg {
+    position: absolute;
+    top: 42px;
+    left: 0;
+    z-index: -1;
+    max-width: none;
+}
+
+
+/* Break basic style */
+
+
+
+#main, .full #main > .content {
+    background: none;
+    border: none;
+    padding-left: 0;
+    min-height: 0 !important;
+} 
+
+#main {
+    margin: auto;
+}
+
+#main >.content {
+    margin: 0 !important;
+    padding-bottom: 10px;
+}
+
+#footer .menu li a {
+    color: white;
+}
+
+.full #footer .menu {
+    padding-left: 10px;
+}
+.connect-button{
+    text-align: center;
+}

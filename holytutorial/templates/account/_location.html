@@ -1,0 +1,19 @@
+{% load staticfiles i18n %}
+
+{% block js %}
+<script type="text/javascript">
+    var lng = parseFloat("{{ user.longitude }}");
+    var lat = parseFloat("{{ user.latitude }}");
+    var myLatlng = new google.maps.LatLng(40.730885,-73.997383);
+    var has_location = {% if user.location_name != None %}true{% else %}false {% endif %};
+	{% if user.location_name != None %}
+ 		myLatlng = new google.maps.LatLng(lat, lng);
+ 	{% endif %}
+	if (navigator && navigator.geolocation) {
+  		$("#my-location").removeClass("hide");
+	}
+</script>
+{% endblock %}
+
+
+{% include 'common/_search_gmap.html' %}

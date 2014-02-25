@@ -1,0 +1,28 @@
+{% load staticfiles i18n %}
+{% block js %}
+<script type="text/javascript">
+    var lng = parseFloat("{{ my_venue.latitude }}");
+    var lat = parseFloat("{{ my_venue.longitude }}");
+    var html = "<p>" + "{{ my_venue.location_name }}" + "</p>" ;
+    var venue_id = "{{ my_venue.id }}";
+    var myLatlng = new google.maps.LatLng(40.730885,-73.997383);
+    my_venue = false;
+	{% if my_venue.player.id == user.id %}
+		my_venue = true;
+	{% endif %}
+	var has_location = {% if my_venue.location_name != None %}true{% else %}false {% endif %};
+	{% if my_venue.location_name != None %}
+ 		myLatlng = new google.maps.LatLng(lng, lat);
+ 	{% elif user.location_name != None %}
+	 	lng = parseFloat("{{ user.latitude}}");
+	    lat = parseFloat("{{ user.longitude}}");
+ 		myLatlng = new google.maps.LatLng(lng, lat);
+ 	{% endif %}
+
+    if (navigator && navigator.geolocation) {
+  		$("#my-location").removeClass("hide");
+	} 
+</script>
+{% endblock %}
+
+{% include 'common/_search_gmap.html' %}

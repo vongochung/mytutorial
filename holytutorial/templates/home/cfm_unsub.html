@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block head %}
+    {% load staticfiles i18n%}
+    <link href="{% static 'css/home.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+{% block left_menu_container %}{% endblock %}
+
+<div class="row">
+ {% include 'home/_welcome.html' %}
+
+    <span class="span4">
+        <div class="flipper">
+            <div class="card">
+                <div class="face front">
+
+                    <h2>{% trans "Confirm unsubcribe email" %}</h2>
+                    <button type="button" id="unsubcribe" str="{{ str }}" success="{% trans 'Succeeded' %}" cant-unsubcribe="{% trans 'Can not unsubscribe!' %}">{% trans 'Yes' %}</button>
+                    <button type="button" id="no-unsub">{% trans 'No' %}</button>
+                </div>
+            </div>
+        </div>
+    </span>
+
+</div>
+
+{% endblock %}
+{% block js %}
+    <script type="text/javascript" src="{% static 'js/home.js' %}"></script>
+{% endblock %}

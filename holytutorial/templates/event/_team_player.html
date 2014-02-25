@@ -1,0 +1,76 @@
+{% load staticfiles i18n %}
+{% block content %}
+
+<h2 class="grey-dark">{% trans "Participants" %}
+    {% if is_creator and not is_over %}
+    <button class="btn btn-mini btn-orange btn-add-team right" event-id="{{event_id}}">{% trans "Add Team"%}</button>
+    {% endif %}
+</h2>
+
+<table class="list-team">
+
+{% for team in participants %}
+
+    {% cycle 'cell1' 'cell2' as cell silent %}
+
+    {% if cell == 'cell1' %}
+    <tr>
+    {% endif %}
+
+    <td class="team {% if not team.players %}empty{% endif %}">
+        {% if participants|length > 1 %}
+        <legend>
+            {{team.team_name}}
+
+            {% if not team.in_team and not is_over and not is_closed%}
+                <button class="btn btn-mini right btn-join-team" team-id="{{team.id}}" event-id="{{event_id}}" task="1" dialog-join="{% trans 'Do you want to join this team?' %}">{% trans "Join!" %}</button>
+            {%endif%}
+
+            {% if is_creator and not is_over and not is_closed%}
+                <button class="btn btn-mini btn-danger btn-delete-team right" delete-team="{{team.id}}" delete-text="{% trans '"Are you sure to delete this team?"' %}" event-id="{{event_id}}">{% trans "Delete"%}</button>
+            {% endif %}
+
+            {% if is_creator and is_over %}
+                {% if not is_closed %}
+                <button class="btn btn-mini btn-orange btn-add-team-score right" team-id="{{team.id}}">{% trans "Update score"%}</button>
+                {% endif %}
+            {% endif %}
+
+            {% if is_over %}
+            <span class="team-score right"><span>Score: {{ team.score }}</span></span>
+            {% endif %}
+
+        </legend>
+        {% endif %}
+
+        {% for player in team.players %}
+        <div class="one-friend participant" friend-id="{{ player.id }}">
+            {% if is_creator and not is_over %}
+            <button class="btn btn-mini btn-danger btn-part-delete" delete-participant="{{ player.id }}" team_id="{{ team.id }}" event-id="{{ event_id }}">{% trans "X"%}</button>
+            {% endif %}
+
+            {% if is_creator and is_over and not is_closed %}
+            <button class="btn btn-mini btn-danger btn-part-escape {% if not player.escaped %}hide{% endif %}" team-player-id="{{ player.id }}">{% trans "!"%}</button>
+            {% endif %}
+
+            <img class="profile-img medium" src="{{ player.get_large_image_src }}" alt="">
+            <div data-profile-url="/account/dashboard/{{ player.player_id }}" class="profile-mask medium tooltip-user" message-user-id="{{ player.player_id }}"></div>
+        </div>
+
+        {% empty %}
+            {% if participants|length > 1 %}
+            <p>{% trans "No participant in this team!"%}</p>
+            {% else %}
+            <p>{% trans "No participant in this event!"%}</p>
+            {% endif %}
+        {% endfor %}
+
+    </td>
+    {% endfor %}
+
+    {% if cell == 'cell2' %}
+    </tr>
+    {% endif %}
+
+</table>
+{% endblock %}

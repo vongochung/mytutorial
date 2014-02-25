@@ -1,0 +1,28 @@
+<form action="" name = "pitch-form" id ="pitch-form"  method="post" accept-charset="utf-8" class="form-inline" style="height:200px">
+	 {{ form.non_field_errors }}
+
+	 {% csrf_token %}
+	<div class="control-group {% if form.name.errors %}error{% endif %}">
+		<div class="controls">
+	        {{ form.name }}
+	    	<span class="help-inline">{{ form.name.errors }}</span>
+	    </div>
+	</div>
+	<div class="control-group {% if form.surface.errors %}error{% endif %}">
+	    <div class="controls">
+	        {{ form.surface }}
+	        <span class="help-inline">{{ form.surface.errors }}</span>
+	    </div>
+	</div>
+	<div class="control-group {% if form.sport.errors %}error{% endif %}">
+	    <div class="controls hide">
+	        {{ form.sport }}
+	    </div>
+	    <span class="help-inline">{{ form.sport.errors }}</span>
+	</div>
+	<div>
+		{% include 'venue/_sport.html' %}
+	</div>
+	{{ form.hidden_id }}
+	{{ form.hidden_venue_id }}
+</form>

@@ -1,0 +1,32 @@
+{% load staticfiles i18n%}
+
+<span id="intro" class="span12">
+
+    <div class="face">
+
+        <h2>Chào mừng bạn đến với holy.com!</h2>
+    
+        <ul id="list-intro">
+        	<li class="item-1">
+        	    <img src="{% static 'icons/001_home.png' %}" alt="welcome">
+        	    {% trans "Chào mừng đến với kho tri thức của nhân loại!" %}
+            </li>
+        	<li class="item-2">
+        	    <img src="{% static 'icons/079_motorsports.png' %}" alt="sports">
+        	    {% trans "Hãy trao đổi kiến thức với những người xung quanh bạn" %}
+            </li>
+        	<li class="item-3">
+        	    <img src="{% static 'icons/102_award.png' %}" alt="sports">
+        	    {% trans "Hãy cho và bạn sẽ nhận được nhiều hơn thế!" %}
+            </li>
+        	<li class="item-4">
+        	    <img src="{% static 'icons/106_tablet.png' %}" alt="sports">
+        	    {% trans "Holy.com cũng đã có mặt trên smartphones!" %}
+            </li>
+        </ul>
+        <div class="clearfix">{% include 'account/fb-connect.html' %}</div>
+
+
+    </div>
+    
+</span>

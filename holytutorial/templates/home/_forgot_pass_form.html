@@ -1,0 +1,13 @@
+{% load staticfiles i18n %}
+<form action="" id="send-pass-form" method="post" enctype="multipart/form-data">
+		{% csrf_token %}
+	    <p>
+	    	{{ form.non_field_errors }}
+	    </p>
+        <div class="control-group {% if form.email.errors %}error{% endif %}">
+	    	<div class="controls">
+	       		{{ form.email }}
+	        	<span class="help-inline">{{ form.email.errors }}</span>
+	    	</div>
+	 	</div>
+</form>

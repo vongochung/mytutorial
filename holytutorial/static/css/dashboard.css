@@ -1,0 +1,437 @@
+.content .top.row {
+    padding-bottom: 30px;
+}
+
+.top.row, .top.row span {
+    margin-left: 0;
+}
+
+.span-info {
+    width: 300px;
+}
+
+.b-r-dotted {
+    border-right: 1px dotted #bcbcbc;
+    padding-right: 10px;
+    margin-right: 10px;
+}
+
+.span-info .stats {
+    border-top: 1px dotted #bcbcbc;
+    width: 300px;
+    padding-top: 10px;
+    padding-bottom: 13px;
+}
+
+.span-info .box {
+    width: 26px;
+    height: 26px;
+    border-radius: 4px;
+    display: block;
+    float: left;
+    margin-right: 10px;
+}
+
+.box.count {
+    background-color: #fe8f01;
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    line-height: 26px;
+}
+
+#settings .box {
+    background-image: url(../icons/19-gear.png);
+    background-repeat: no-repeat;
+    background-color: white;
+    border: 1px solid #dbdbdb;
+    margin-top: 0px;
+    background-position: 3px 3px;
+}
+
+.span-info a {
+    font-size: 11px;
+}
+
+.span-message {
+    margin-left: 0;
+}
+
+.span-message textarea {
+    width: 316px;
+    height: 62px;
+    display: block;
+}
+
+.span-message p {
+    font-size: 14px;
+    line-height: 14px;
+    margin: 10px 0;
+}
+
+.span-message .btn {
+    width: 75px;
+    margin-top: 6px;
+    left: -2px;
+    position: relative;
+}
+
+.span-message p , .span-message .btn {
+    display: inline-block;
+}
+
+.msg {
+    width: 100%;
+    margin-top: 10px;
+    clear: both;
+}
+
+.msg .top {
+    margin-bottom: 5px;
+}
+
+.msg .bottom {
+    display: none;
+    width: 545px;
+}
+
+.msg .content-panel {
+    position: relative;
+}
+
+.msg .content {
+    background-color: white;
+    border: 1px solid #dbdbdb;
+    width: 575px;
+    float: left;
+    padding: 12px;
+    margin-left: 57px;
+    margin-bottom: 10px;
+}
+
+.msg .content.pop-active {
+
+}
+
+.msg .content.pop-hidden {
+
+}
+
+.msg.pop-active .content, .msg.message-type-1 .content:hover, .msg.message-type-2 .content:hover {
+    border: 1px solid #bcd9ed;
+    cursor: pointer;
+    background-color: #ecf0f3;
+}
+
+.msg.pop-active .content {
+    background-color: rgba(99, 99, 99, 0.2) !important;
+}
+
+.msg .profile-img {
+    float: left;
+    position: absolute;
+    left: 0;
+}
+
+.popover-title .event-icon {
+    width: 32px;
+    margin: 5px 0;
+}
+
+.popover-title.with-img {
+    padding: 0 10px;
+}
+
+.popover-title.friend-request {
+    height: 32px;
+    padding-top: 16px;
+}
+
+.popover-title.friend-request .friend-name > .profile-img {
+    left: 11px;
+    top: 5px;
+}
+
+.popover-title.friend-request .friend-name > .profile-mask {
+    top: 5px;
+}
+
+.popover-title .friend-name {
+    padding-left: 42px;
+    font-size: 16px;
+}
+
+.popover .player-age {
+    font-size: 10px;
+}
+
+.stats-bottom {
+    width: 240px;
+    font-size: 11px;
+    position: relative;
+    left: -5px;
+}
+
+.stats-bottom .b-r-dotted {
+    padding-right: 5px;
+    margin-right: 2px;
+}
+
+.event-tooltip ul span {
+    font-weight: bold;
+    float: right;
+}
+
+.msg .arrow-user {
+    background-image: url(../images/msg-arrow.png);
+    width: 7px;
+    height: 13px;
+    position: absolute;
+    top: 13px;
+    left: 51px;
+}
+
+.msg.pop-active .content .arrow-user, .msg.message-type-1 .content:hover .arrow-user, .msg.message-type-2 .content:hover .arrow-user {
+    display: none;
+}
+
+.reply-list {
+    margin-left: 57px;
+    clear: both;
+}
+
+.txt-reply {
+    width: 532px;
+    display: block;
+}
+
+.btn-reply, .btn-wall-reply {
+    display: block;
+    float: right;
+    width: 80px;
+    margin-bottom: 10px;
+}
+
+
+.msg .reply-list .content {
+    width: 517px;
+}
+
+.profile-success{
+	height: 50px;
+	background-color: #ffffff;
+}
+
+#edit-profile-modal {
+    width: 440px;
+}
+
+#profile-form, #profile-form select {
+    width: 100%;
+}
+
+#profile-form select {
+	top:0;
+	visibility : visible
+}
+#profile-form input {
+    width: 97%;
+}
+
+.span-info-actions {
+    width: 230px;
+}
+
+/*-------------------facebook----------------*/
+
+.one-friend.view, .one-friend.view .mask, .one-friend.view .content, .one-friend .img-friend img  {
+	width: 125px;
+	height: 125px;
+}
+
+.one-friend .img-friend {
+    background-color: grey;
+}
+
+.one-friend .mask {
+    background-color: rgba(255,255,255,.8) !important;
+}
+
+.one-friend {
+	float: left;
+	background-color: white;
+	margin: 0 20px 20px 0 !important;
+}
+
+.name-friend {
+    text-align: center;
+    top: 0;
+    position: absolute;
+    font-size: 14px;
+    line-height: 14px;
+    z-index: 1;
+    color: white;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.23);
+    width: 115px;
+}
+
+.friends {
+	width: 660px;
+	padding-top: 20px;
+}
+
+.footer-friend .btn {
+    width: 125px;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    border-radius: 0;
+}
+
+.fb_dialog, .fb_dialog_iframe iframe {
+	 width: 400px !important;
+}
+
+.mask .profile-panel {
+    position: absolute;
+    margin: auto;
+    left: 50%;
+    top: 50%;
+    margin-left: -28px;
+    margin-top: -29px;
+}
+
+#edit-image-profile-modal {
+    max-height: none;
+    width: 400px;
+}
+
+#edit-image-profile {
+    max-height: none;
+}
+
+#edit-image-profile-modal .thumbnail img {
+    max-height: 280px;
+}
+
+.one-friend .profile-panel .profile-img {
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
+}
+
+#load-see-more{
+    height: 40px;
+    width: 40px;
+    margin: 0 auto;
+}
+
+#settings .dropdown-menu {
+    top: -15px;
+    left: 32px;
+}
+
+#edit-sport-modal {
+    width: 582px;
+}
+
+.msg.message-type-None .request-info {
+    display: none;
+}
+
+.msg .request-info {
+    position: absolute;
+    top: 60px;
+    left: 57px;
+    font-size: 11px;
+    font-style: italic;
+    opacity: 0;
+    -webkit-transition: all .3s ease-in-out;
+}
+
+.msg .content:hover .request-info {
+    opacity: 1;
+    top: 42px;
+}
+
+/* Notifications */
+
+#messages.notification {
+    padding-bottom: 10px;
+}
+
+.notification .msg {
+    margin-top: 0;
+    float: left;
+    width: 50px;
+    height: 50px;
+    clear: none;
+}
+
+.notification .profile-mask {
+    cursor: pointer;
+}
+
+.notification .profile-mask.with-border:hover, .notification .pop-active .profile-mask.with-border {
+    background-image: url(../images/profile-mask-border.png);
+}
+
+.notification .msg .content {
+    border-color: #ffd9a8;
+    height: 12px;
+    font-size: 0;
+    width: 10px;
+}
+
+.notification .box.count {
+    position: relative;
+    width: 15px;
+    height: 15px;
+    font-size: 12px;
+    font-weight: normal;
+    left: 28px;
+    top: 20px;
+    line-height: 15px;
+    border-radius: 8px;
+}
+
+.menu .box.count {
+    display: inline-block;
+    width: 20px;
+    font-weight: normal;
+    height: 21px;
+    line-height: 20px;
+    font-size: 11px;
+    margin-left: 10px;
+    border-radius: 10px;
+}
+
+.notification h2 {
+    font-size: 16px;
+}
+
+/* End notification */
+
+/* Category */
+
+.pages a {
+    display: block;
+    line-height: 40px;
+    width: 100%;
+    color: #ed702b !important;
+}
+.pages a:hover{
+    text-decoration: underline;
+}
+
+.pages a h4{
+    color: #ed702b !important;
+    width: 100%;
+}
+
+.pages a h4 span{
+    color: #000 !important;
+    width: 100%;
+}
+

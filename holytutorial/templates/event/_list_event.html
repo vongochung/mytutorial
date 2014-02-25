@@ -1,0 +1,26 @@
+{% load staticfiles i18n %}
+
+{% block content %}
+
+{% if not all %}
+    <h2 class="grey-dark no-border">
+    {% if my_profile %}
+        {% if venue %}
+        {% else %}
+            {% trans "My events" %}
+        {% endif %}
+        <!-- <button class="btn btn-orange right btn-create-event">{% trans "Create Event" %}</button> -->
+    {% elif is_favourite %}
+        {% trans "Favourite events" %}
+    {% else %}
+        {% trans "All events" %}
+    {% endif %}
+    </h2>
+    {% include 'event/__list_event.html' %}
+{% else %}
+	{% include 'event/_map.html' %}
+    <div id="list-event-map" class="list-map">
+    {% include 'event/__list_event.html' %}
+    </div>
+{% endif %}
+{% endblock %}

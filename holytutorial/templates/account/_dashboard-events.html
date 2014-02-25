@@ -1,0 +1,19 @@
+{% load staticfiles i18n %}
+
+<div id="messages" class="notification">
+    
+    {% if messages %}
+    <h2 class="grey-dark border-info">{% trans 'Pending requests' %}</h2>
+    {% for message in messages %}
+        {% include 'message/_notification.html' %}
+    {% endfor %}
+    
+    {% endif %}
+    
+    <div class="clear"></div>
+    
+</div>
+
+<h2 class="grey-dark clear no-border">{% trans "Events" %}</h2>
+
+{% include 'event/__list_event.html' %}

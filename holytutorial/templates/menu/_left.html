@@ -1,0 +1,5 @@
+{% for item in categories %}
+    <li class="category">
+        <a {% if item.slug == category_name %}class="active"{% endif %} href="{% url 'detail_category' slug=item.slug %}"><i class="icon-th" data-background-image="url(/static/images/glyphicons-halflings.png)" style="background-image: url(/static/images/glyphicons-halflings.png);"></i>{{ item }}</a>
+    </li>
+{% endfor %}

@@ -1,0 +1,31 @@
+{% load staticfiles i18n %}
+
+{% if not my_venue or my_venue.player.id == user.id %}
+
+<div class="search-gmap">
+
+	<form class="navbar-form">
+		<input type="text" placeholder="{% trans 'Type an address, street or city name' %}" name="address" id="address-find" class="span2" {% if my_venue %} venue="{{ my_venue.id }}" {% endif %}} {% if my_event %} event="{{ my_event.id }}" {% endif %}} >
+		<button class="btn btn-orange" id="find-gmap">{% trans "Find" %}</button>
+        <button class="btn hide" id="my-location">{% trans "Current location" %}</button>
+        {% if current_user %}
+            <button class="btn" id="btn-filter-sports" type="button">{% trans "Filter by sports" %}</button>
+        {% endif %}
+	</form>
+</div>
+
+{% endif %}
+<div id="filter-sport-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">{% trans "×" %}</button>
+        <h3>{% trans "Filter Sport" %}</h3>
+    </div>
+    <div id="filter-sport" class="modal-body">
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn" id="filtered-sports" data-dismiss='modal'>{% trans "Apply filter" %}</button>
+    </div>
+</div>
+
+<div id="map_canvas"></div>

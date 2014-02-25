@@ -1,0 +1,144 @@
+{% extends "layout.html" %}
+
+{% load staticfiles i18n %}
+
+{% block head %}
+    <link href="{% static 'css/venue.css' %}" rel="stylesheet">
+    <link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block left_menu %}
+    <li data-url="/venue/get_venue_wall_messages/{{venue.id}}"><a id="left-menu-all-messages" class="active" href="#"><i class="icon-th"></i> {% trans "Wall" %}</a></li>
+    <li data-url="/venue/get_event_by_venue/{{venue.id}}"><a id="left-menu-my-venues" href="#"><i class="icon-th"></i> {% trans "Events" %}</a></li>
+    <li data-url="/venue/get_venues_pitches/{{ venue.id  }}"><a id="left-menu-venues-pitches" href="#"><i class="icon-th"></i> {% trans "Pitches" %}</a></li>
+{% endblock %}
+
+{% block content %}
+
+
+<div class="result-profile">
+    <div class="result-image" venue_id = "{{venue.id}}"  {% if current_user.id == venue.player.id %} edit-image-venue = "true" {% endif %}>
+        <img src="{{ venue.get_image}}" alt="">
+    </div>
+    <div class="row-view-right main-info">
+        <div class="result-name">
+            <span>{{venue.name}}</span>
+
+
+            <a href="#" id="btn-edit-location-venue" class="btn btn-orange right" venue="{{venue.id}}">{% trans "Location" %}</a>
+
+            {% if current_user.id == venue.player.id %}
+            <a href="#" id="btn-edit-venue" class="btn btn-orange right" venue ="{{venue.id}}">{% trans "Edit venue info" %}</a>
+            {% endif %}
+
+            {% if current_user.id != venue.player.id %}
+            <button id="btn-add-favourite" dialog-text="{% trans 'Do you want to add this venue in your favorites' %}" class="btn btn-orange right {% if is_favourite %}hide{% endif %}" venue="{{venue.id}}" player-id="{{current_user.id}}" is-favourite="false"><i class="icon-star icon-white"></i></button>
+            <button id="btn-remove-favourite" class="btn btn-orange right {% if is_favourite == False%}hide{% endif %}" venue="{{venue.id}}" dialog-text="{% trans 'Do you want to remove this venue from your favorites' %}" player-id="{{current_user.id}}" is-favourite="true">{% trans "Remove favourite" %}</button>
+            {% endif %}
+        </div>
+        <span class="block"><i class="icon-map-marker"></i> {{venue.location_name|truncatechars:65}}</span>
+
+        {% if venue.note %}
+        <i>&#147; {{ venue.note }} &#148;</i>
+        {% endif %}
+
+    </div>
+
+    <div class="row-view-right right">
+
+        <div class="left sub-info">
+
+            <ul>
+                <li>Sport Type: {{venue.covering}}</li>
+                <li>Phone: {{venue.phone}}</li>
+                <li class="label-sport-list">{% trans "Available sports" %}:</li>
+            </ul>
+
+
+            <div class="venue-sport-list">
+                {% for sport_icon in venue.pitches_icon %}
+                <img  src="{{ sport_icon }}" alt="">
+                {% endfor %}
+            </div>
+
+        </div>
+
+        <div class="right">
+
+            {% if venue.longitude and venue.latitude %}
+                <script type="text/javascript">
+                    $(function() {
+                        load_map({{ venue.longitude }}, {{ venue.latitude }}, 16, "", "venue-map");
+                    })
+                </script>
+                <div id="venue-map"></div>
+            {% endif %}
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+<div id="main-content" class="animated on-load bounceInUp">
+	{% include "venue/_venue_wall.html" %}
+</div>
+
+
+<div id="create-venue-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>{% trans "Create venue" %}</h3>
+    </div>
+    <div id="create-venue" class="modal-body">
+
+    </div>
+    <div class="modal-footer">
+        <button id="btn-save-venue" class="btn btn-orange">Save</button>
+    </div>
+</div>
+
+<div id="create-pitch-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>{% trans "Create Pitch" %}</h3>
+    </div>
+    <div id="create-pitch" class="modal-body">
+
+    </div>
+    <div class="modal-footer">
+        <button id="btn-save-pitch" class="btn btn-orange">Save</button>
+    </div>
+</div>
+
+
+<div id="edit-location-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">{% trans "×" %}</button>
+        <h3>{% trans "Edit Venue Location" %}</h3>
+    </div>
+    <div id="edit-location-venue" class="modal-body"></div>
+</div>
+
+<div id="edit-image-venue-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">{% trans "×" %}</button>
+        <h3 id="myModalLabel">{% trans "Edit Image Venue" %}</h3>
+    </div>
+    <div id="edit-image-venue" class="modal-body"></div>
+</div>
+
+{% endblock %}
+{% block js %}
+    <script src="{% static 'js/mygmap.js' %}"></script>
+    <script src="{% static 'js/venue.js' %}"></script>
+    <script src="{% static 'js/event.js' %}"></script>
+    <script src="{% static 'js/message.js' %}"></script>
+    <script src="{% static 'js/wall_message.js' %}"></script>
+    <script src="{% static 'js/dashboard.js' %}"></script>
+    {% if is_owner and venue.longitude == None or is_owner and venue.latitude == None %}
+    <script type="text/javascript">
+        $(function() {
+            $('#btn-edit-location-venue').click();
+        })
+    </script>
+    {% endif %}
+{% endblock %}

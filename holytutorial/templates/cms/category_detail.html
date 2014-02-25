@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% load staticfiles i18n %}
+
+{% block head %}
+<link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block left_menu %}
+     {% include 'menu/_left.html' %}
+{% endblock %}
+
+{% block content %}
+<div id="main-content" class="animated on-load bounceInUp">
+   <h1>Tutorial : {{ category_name }}</h1>
+   <hr />
+   <div class="pages">
+       {% for page in pages %}
+           <a href="{% url 'detail_page' category_slug=category_name page_slug=page.slug %}">
+               <h4><span>Tutorial #{{ forloop.counter }}:</span> {{ page.title }}</h4>
+           </a>
+       {% endfor %}
+   </div>
+</div>
+{% endblock %}
+
+
+{% block js %}
+{% endblock %}

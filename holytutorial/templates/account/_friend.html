@@ -1,0 +1,115 @@
+{% load staticfiles i18n %}
+<div class ="one-friend view view-tenth {% if fd and fb == False  or list_not_exist_widoo and friend.id not in list_not_exist_widoo and event_id == '0' or list_widoo_friend and friend.id in list_widoo_friend or not fb or friend.id  in participants  %}active{% endif %}" friend-id="{{ friend.id }}">
+    	{% if event_id != "0" and is_creator == True %}
+    	<button class="btn btn-orange btn-delete-par hide" delete-participant="{{friend.id}}" event-id="{{event_id}}">{% trans "Delete"%}</button>
+    	{% endif %}
+		<div class="img-friend">
+		    <div class="name-friend">{% if fb and fb == True %}{{ friend.name }}{% elif fb == False %}{{ friend.contact }}{% elif not fb %}{{friend}}{% endif %}</div>
+    		{% if fb and fb == True  %}
+			<img class="profile-img main" src="http://graph.facebook.com/{{friend.id}}/picture?width=180&height=180" alt="">
+			{% elif fb == False %}
+			<img class="profile-img main" src="{{ friend.contact.get_large_image_src }}" alt="">
+            {% elif not fb %}
+            <img class="profile-img main" src="{{ friend.get_large_image_src }}" alt="">
+			{% endif %}
+		</div>
+
+		<div class="mask">
+
+    		<div class="profile-panel">
+        		{% if fb and fb == True %}
+        		<img class="profile-img medium" src="http://graph.facebook.com/{{friend.id}}/picture?width=75&height=75" alt="">
+        		{% elif fb == False %}
+        		<img class="profile-img medium" src="{{ friend.contact.get_large_image_src }}" alt="">
+                {% elif not fb %}
+                <img class="profile-img medium" src="{{ friend.get_large_image_src }}" alt="">
+        		{% endif %}
+    		</div>
+
+    		<div class="footer-friend">
+                {% if not fb %} <!-- "Invite Friend" -->
+        			<button class="btn btn-small btn-success
+                        {% if event_id != '0' and friend.contact_id not in participants %}hide{% endif %}"
+                        btn="view-profile" data-url="/account/dashboard/{{friend.contact_id}}"
+                        facebook-id = "{{friend.contact.fb_id}}">
+                        <i class="icon-ok icon-white"></i>{% trans "View profile" %}
+                    </button>
+
+                {% elif fb %} <!-- "Invite Facebook Friend" -->
+                    <button class="btn btn-small btn-success
+                        {% if friend.id not in list_widoo_friend or event_id != "0" %}hide{% endif %}"
+                        btn="view-profile" data-url="/account/dashboard/{% if friend.widoo_id != None %}{{friend.widoo_id}}{% endif %}"
+                        facebook-id = "{{friend.id}}">
+                        <i class="icon-ok icon-white"></i>{% trans "View profile" %}
+                    </button>
+                {% endif %}
+
+    			{% if event_id == '0' and friend.id in list_not_widoo_friend %}
+    			     <button btn="add-friend" id="{{friend.id}}"
+                         facebook-id = "{{friend.id}}" facebook-name = "{{friend.name}}"
+                         data-url="" class="btn btn-small btn-success right" task="1"
+                         dialog-text="{% trans 'Do you want to add this friend?' %}"
+                         success="{% trans 'Invited successfully' %}">
+                         <i class="icon-plus icon-white" ></i>{% trans "Add Friend" %}
+                     </button>
+    			{% endif %}
+
+
+                {% if event_id != '0' %} <!--============================== In An Event Detail-->
+                    {% if not fb %} <!-- =========================================== left menue "Invite Friend " -->
+                        {% if friend.contact_id not in participants %}
+                            <button class="btn btn-small btn-orange"
+                                event="invite" event-id="{{event_id}}"
+                                facebook-id = "{{friend.contact.fb_id}}"
+                                invite="{{friend.contact.user_ptr_id}}"
+                                friend-name="{{friend.contact}}"
+                                add-friend="{% if friend.contact_id in participants %}false{% else %}true{% endif %}"
+                                create-account="false" dialog-text="{% trans 'Do you want to invite your friend ?' %}"
+                                success="{% trans 'Invited successfully' %}">
+                                <i class="icon-plus icon-white"></i>{% trans "Invite" %}
+                            </button>
+                        {% endif %} <!-- for in event invite widoo friend-->
+
+                    {% elif fb %} <!-- =========================================== left menue "Invite Facebook Friend " -->
+
+                        {% if friend.id in list_not_exist_widoo or friend.id in list_not_widoo_friend or event_id != '0' %}
+                        <button class="btn btn-small btn-orange"
+                            event="invite" event-id="{{event_id}}"
+                            facebook-id = "{{friend.id}}"
+                            invite="{{friend.id}}"
+                            friend-name="{{friend.name}}"
+                            add-friend="true"
+                            create-account="{% if friend.id in list_not_exist_widoo %}true{% endif %}"
+                            dialog-text="{% trans 'Do you want to invite your friend ?' %}" success="{% trans 'Invited successfully' %}">
+                            <i class="icon-plus icon-white"></i>{% trans "Invite" %}
+                        </button>
+                        {% endif %}
+
+                    {% endif %}
+
+                {% elif event_id == '0' %} <!--============================== In Dashboard -->
+
+                    {% if not fb %} <!-- =========================================== left menue "Friend" -->
+                        <!-- no invite friend, only display list of friend -->
+
+                    {% elif fb %} <!-- =========================================== left menue "Facebook" -->
+
+                        {% if friend.id in list_not_exist_widoo %}
+                        <button class="btn btn-small btn-orange"
+                            btn="invite" event-id="{{event_id}}"
+                            facebook-id = "{{friend.id}}"
+                            invite="{{friend.id}}"
+                            friend-name="{{friend.name}}"
+                            add-friend="true"
+                            create-account="true" dialog-text="{% trans 'Do you want to invite your friend ?' %}" success="{% trans 'Invited successfully' %}">
+                            <i class="icon-plus icon-white"></i>{% trans "Invite" %}
+                        </button>
+                        {% endif %}
+
+                    {% endif %}
+
+                {% endif %}
+
+    		</div>
+		</div>
+</div>

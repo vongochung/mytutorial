@@ -1,0 +1,31 @@
+{% load staticfiles i18n %}
+
+<link href="{% static 'css/bootstrap-fileupload.min.css' %}" rel="stylesheet">
+<link href="{% static 'css/bootstrap-fileupload.css' %}" rel="stylesheet">
+
+<div class = "form-upload">
+	<form action="{{url_upload}}" id="upload-form" method="post" enctype="multipart/form-data">
+		{% csrf_token %}
+	    <p>
+	    	{{ form.non_field_errors }}
+	    </p>
+	    <div class="fileupload fileupload-new" data-provides="fileupload">
+			<div class="fileupload-new thumbnail"><img src="{{image_src}}" /></div>
+		  	<div class="fileupload-preview fileupload-exists thumbnail"></div>
+  			<div>
+			    <span class="btn btn-file">
+			    	<span class="fileupload-new">{% trans "Select image" %}</span>
+			    	<span class="fileupload-exists">{% trans "Change" %}</span>
+			    	{{ form.file }}
+			    </span>
+   				<a href="#" class="btn fileupload-exists" data-dismiss="fileupload">{% trans "Remove" %}</a>
+                <button id = "btn-upload" class= "btn btn-orange">{% trans "Upload" %}</button>
+  			</div>
+		</div>
+		{{ form.hidden_id }}
+	</form>
+	<div class="alert close" id = "error">{{ form.file.errors }}</div>
+</div>
+
+<script src="{% static 'js/bootstrap-fileupload.min.js' %}"></script>
+<script src="{% static 'js/bootstrap-fileupload.js' %}"></script>    

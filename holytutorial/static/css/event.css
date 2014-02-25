@@ -1,0 +1,146 @@
+#event-form{
+    max-height:400px
+}
+#event-form select{
+	top:0;
+	visibility : visible
+}
+
+#create-event-modal {
+    width: 520px;
+    height: 557px;
+}
+
+#event-form, #event-form select {
+    width: 100%;
+}
+
+#event-form input,textarea {
+    width: 97%;
+}
+
+#event-form textarea {
+    height: 50px;
+}
+
+.ui-autocomplete {
+    z-index: 9999 !important;
+}
+
+.time-picker input, .date-picker input {
+    width: 190px !important;
+}
+
+.time-picker .add-on, .date-picker .add-on {
+    margin-top: 5px;
+}
+
+.date-picker .add-on {
+    margin-right: 5px;
+}
+
+#create-event {
+    height: 420px;
+}
+
+#create-event .control-group.date-time {
+    display: inline-block;
+    width: 233px;
+    vertical-align: top;
+}
+
+.datetimepicker-hours .table-condensed {
+    width: 215px;
+}
+
+.datetimepicker-hours thead, .datetimepicker-hours tfoot {
+    display: none;
+}
+
+#btn-edit-event {
+    margin-left: 10px;
+}
+
+.participant .btn-part-delete {
+    display: none;
+}
+
+.participant .btn-part-delete, .participant .btn-part-escape {
+    position: absolute;
+    z-index: 1000;
+    left: -8px;
+    top: -4px;
+}
+
+.participant:hover .btn-part-delete, .participant:hover .btn-part-escape {
+    display: block;
+}
+
+/*-------------form-add-team--------------*/
+#add-team-event-modal {
+    max-height: none;
+    width: 400px;
+}
+
+#team-form{
+    width: 100%;
+}
+
+#team-form input {
+    width: 97%;
+}
+
+.event-tooltip-icon {
+    width: 100px;
+    float: left;
+}
+
+.team {
+    width: 325px;
+    vertical-align: top;
+}
+
+.team legend {
+    width: 90%;
+    background-color: white;
+    padding: 0 10px;
+    margin-top: 20px;
+}
+
+.team .one-friend {
+    margin: 0 10px 10px 0 !important;
+    position: relative;
+}
+
+legend .btn {
+    margin-top: 11px;
+}
+
+.btn-join-team {
+    width: 70px;
+    margin-left: 5px;
+}
+
+.controls .boolean-field label{
+    display: inline !important;
+}
+
+.controls .boolean-field input{
+    width: 20px !important;
+}
+
+.player-amount {
+    font-size: 16px;
+}
+
+.event-info {
+    width: 330px;
+    padding-top: 10px;
+}
+
+#id_has_team {
+    display: inline;
+    width: 30px !important;
+    margin: 0;
+    margin-bottom: 4px;
+}

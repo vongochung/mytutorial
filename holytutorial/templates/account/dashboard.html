@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+
+{% load staticfiles i18n %}
+
+{% block head %}
+    <link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/hover-effects/style_common.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/hover-effects/style10.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/event.css' %}" >
+{% endblock %}
+
+{% block left_menu %}
+     {% include 'menu/_left.html' %}
+{% endblock %}
+
+{% block content %}
+
+<div class="top row animated on-load">
+
+    <span class="span-profile">
+        <div class="animated fadeIn on-load">
+        	<div class="image-div">
+            	<img class="profile-img large" src="{{ profile_player.get_large_image_src }}" alt="" title="click to change"/>
+            </div>
+            <div class="profile-mask large" {% if profile_player == current_user %}id="profile-img"{% endif %} ></div>
+
+        </div>
+    </span>
+
+    <span class="span-info">
+        <h4>{{ profile_player|truncatechars:23 }}</h4>
+        <div class="clear"></div>
+
+        <div class="stats grey-light">
+
+        </div>
+        {% if profile_player == current_user %}
+
+        <div id="settings" class="btn-group">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <div class="animated fadeIn on-load">
+                    <i class="box"></i>
+                </div>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a class="grey profile-link" href="#">{% trans "Change profile" %}</a></li>
+                <li><a class="grey sport-link" href="#">{% trans "Change your sport" %}</a></li>
+                <li><a class="grey location-link" href="#">{% trans "Change your location" %}</a></li>
+            </ul>
+            <button class="btn btn-success post-face">Post Face</button>
+        </div>
+        <span id="unread-messages" class="count box">{{ unread_messages|length }}</span>
+        {% endif %}
+    </span>
+
+</div>
+
+{% endblock %}
+
+
+{% block js %}
+    <script src="{% static 'js/dashboard.js' %}"></script>
+    <script src="{% static 'js/message.js' %}"></script>
+    <script src="{% static 'js/mygmap.js' %}"></script>
+    <script src="{% static 'js/profile.js' %}"></script>
+    <script src="{% static 'js/wall_message.js' %}"></script>
+    <script src="{% static 'js/event.js' %}"></script>
+{% endblock %}

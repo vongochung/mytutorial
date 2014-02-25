@@ -1,0 +1,33 @@
+{% load staticfiles i18n %}
+<div message-id="{{message.id}}" class="msg message-type-{% if is_owner and message.type == 1 or is_owner and message.type == 2 %}{{ message.type }} {% else %}None{% endif %}">
+
+    <div class="top right">
+        <span class="date b-r-dotted">{{ message.get_date }}</span>
+        <button data-text="{% trans 'Cancel' %}" message-id="{{message.id}}" wall-type="{{message.wall_type}}"  class="btn-show-reply btn btn-mini">{% trans "Reply" %}</button>
+        {% if is_owner or current_user.id == message.user.id %}
+        <button message-id="{{message.id}}" class="btn-delete btn-danger btn btn-mini" wall-type="{{message.wall_type}}" delete-text="{% trans 'Are you sure to delete this message?' %}" >
+            {% trans "Delete" %}
+        </button>
+        {% endif %}
+    </div>
+
+    <div class="content-panel clear">
+        <img class="profile-img small" src="{{message.user.get_image_src}}" alt="" />
+        <div class="profile-mask tooltip-user" data-profile-url="{% url 'dashboard' message.user.id %}" message-user-id="{{message.user.id}}"></div>
+        <div class="content" {% if is_owner and message.type == 1 or is_owner and message.type == 2 %} message-type="{{message.type}}" {% endif %}  message-id="{{message.id}}" >
+            {{ message.content }}
+            <div class="arrow-user"></div>
+            <div class="request-info">{% trans "Click to see the request" %}</div>
+        </div>
+        <div class="reply-list">
+            {% for reply in message.replies %}
+                {% include 'message/_reply.html' %}
+            {% endfor %}
+        </div>
+        <div class="bottom right control-group">
+            <input type="text" class="txt-reply" />
+            <button message-id="{{message.id}}" class="btn-reply btn btn-mini" wall-type="{{message.wall_type}}" data-wall-id="{{ message.wall_id }}" >{% trans "Send" %}</button>
+        </div>
+    </div>
+
+</div>

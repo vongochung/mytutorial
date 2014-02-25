@@ -1,0 +1,96 @@
+/*-------------form-create-venues--------------*/
+#venue-form select{
+	top:0;
+	visibility : visible;
+}
+
+#venue-form #id_note {
+    height: 60px;
+}
+
+#create-venue-modal {
+    width: 500px;
+}
+
+#venue-form, #venue-form select {
+    width: 100%;
+}
+
+#venue-form input,textarea {
+    width: 97%;
+}
+
+/*-------------list-venues--------------*/
+
+
+/*-------------form-create-pitches--------------*/
+
+#pitch-form select{
+	top:0;
+	visibility : visible
+}
+
+#pitch-venue-modal {
+    width: 440px;
+}
+
+#pitch-form, #pitch-form select {
+    width: 100%;
+}
+
+#pitch-form input,textarea {
+    width: 97%;
+}
+
+#create-pitch{
+	max-height: 400px;
+}
+
+.venue-sport-list {
+    position: relative;
+}
+
+.label-sport-list {
+    padding-top: 10px;
+}
+
+.venue-sport-list img{
+    width: 32px;
+}
+
+#venue-map {
+    width: 300px;
+    height: 150px;
+    border: 1px solid #dbdbdb;
+}
+
+.main-info {
+    padding-bottom: 25px;
+}
+
+.result-profile .row-view-right {
+    width: 547px;
+    padding-bottom: 10px;
+}
+
+#btn-add-favourite, #btn-remove-favourite, #btn-edit-venue {
+    margin-right: 10px;
+}
+
+#btn-add-favourite {
+    width: 30px;
+}
+
+#btn-add-favourite i {
+    position: relative;
+    left: -4px;
+}
+
+.row-view-right .sub-info {
+    width: 242px;
+    margin-top: -5px;
+}
+
+.btn-create-venue {
+    margin-top: 10px;
+}

@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block head %}
+    {% load staticfiles i18n%}
+    <link href="{% static 'css/home.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+
+    {% include 'home/_welcome.html' %}
+
+    <span class="span4">
+        <div class="flipper">
+            <div class="card">
+                <div class="face front">
+
+                    <h2>{% trans "Active Account" %}</h2>
+
+                    <div class="success">
+                        {% if success == True %}
+                        <p>{% trans "Congratulation." %}</p>
+                        <p>{% trans "Active account successfully." %}</p>
+                        <p>{% trans "Please go to login page." %}</p>
+
+                        <a href="/" class="btn btn-orange flip btn-block">{% trans "Login" %}</a>
+                        {% endif %}
+
+                        {% if player_activation == None %}
+                            <p>{% trans "Active code not exist." %}</p>
+                            <a class="btn" href="/">{% trans 'Back' %}</a>
+                        {% endif %}
+
+                        {% if is_expired == True %}
+                        <p>{% trans "Active code is expired." %}<br/>
+                        {% trans "Please use forgot password to reset you password and active your account." %}</p>
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </span>
+</div>
+
+{% endblock %}

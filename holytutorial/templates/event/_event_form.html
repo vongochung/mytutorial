@@ -1,0 +1,113 @@
+{% load staticfiles i18n %}
+<form action="" name = "event-form" id ="event-form"  method="post" accept-charset="utf-8" class="form-inline">
+    {{ form.non_field_errors }}
+	{% csrf_token %}
+    <div class="event-first-step">
+        <div class="control-group date-time {% if form.kick_off_date.errors %}error{% endif %}">
+            <div class="date-picker controls input-append date" data-date="{{ form.kick_off_date.value|default_if_none:''}}" data-date-format="mm-dd-yyyy" data-link-field="kick_off_date" data-link-format="mm-dd-yyyy">
+                <input placeholder="{% trans 'Date' %}" size="16" type="text" value="{{ form.kick_off_date.value|default_if_none:''}}">
+                <span class="add-on"><i class="icon-th"></i></span>
+            </div>
+            <input type="hidden" id="kick_off_date" name="kick_off_date" value="{{ form.kick_off_date.value|default_if_none:''}}" invalid-text="{% trans 'Kick off date is not valid !' %}"  />
+            <span class="help-inline">{{ form.kick_off_date.errors }}</span>
+         </div>
+        <div class="control-group date-time {% if form.kick_off_time.errors %}error{% endif %}">
+            <div class="controls time-picker input-append date form_time" data-date="{{ form.kick_off_time.value|default_if_none:''}}" data-date-format="hh:ii" data-link-field="kick_off_time" data-link-format="hh:ii">
+                <input placeholder="{% trans 'Time' %}" size="16" type="text" value="{{ form.kick_off_time.value|default_if_none:''}}">
+                <span class="add-on"><i class="icon-th"></i></span>
+            </div>
+            <input type="hidden" id="kick_off_time" name="kick_off_time" value="{{ form.kick_off_time.value|default_if_none:''}}" invalid-text="{% trans 'Kick off time is not valid !' %}" hour-advance-text="{% trans 'Kick off time should be 1h in advance from the real time' %}" />
+            <span class="help-inline">{{ form.kick_off_time.errors }}</span>
+        </div>
+        <br/>
+        <label style="font-weight: bold">Select event sport:</label>
+        <input name="pitch_sport" type="hidden" value="{{ pitch_sport }}" select-sport-text="{% trans 'You need to select sport type!!' %}">
+        {% include 'venue/_sport.html' %}
+    </div>
+    <div class="event-second-step hide">
+        <div class="control-group ">
+            <div class="controls">
+                <input id="venue-text" name="venue_name" placeholder="{% trans 'Search for a venue' %}" type="text" value="{% if venue %}{{ venue.name }}{% endif %}" dialog-text="{% trans 'Do you want to create new venue in ' %}">
+                <span class="venue-address"></span>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls hide" id="new-pitch-control">
+                <input id="pitch-name" placeholder="{% trans 'Enter new pitch name or leave blank to use sport name' %}" type="text">
+                <span class="btn btn-create-pitch">{% trans 'Creat new pitch' %}</span>
+            </div>
+        </div>
+        <div class="control-group {% if form.pitch.errors %}error{% endif %}">
+            <div class="controls">
+                <select id="id_pitch" name="pitch" class="{% if form.hidden_id.value == None  or form.hidden_id.value == "" %}hide{% endif %}" dialog-add-pitch="{% trans 'Do you want to create new pitch for selected sport ?' %}">
+                    <option value="0" >{% trans '---Create new pitch---'%}</option>
+                    {% for p in venue_pitches %}
+                    <option value="{{ p.id }}" {% if p == pitch %}selected="selected"{% endif %}>{{ p.name }} ({{ p.sport.name }})</option>
+                    {% endfor %}
+                </select>
+                <span class="help-inline">{{ form.pitch.errors }}</span>
+            </div>
+        </div>
+        {% if form.hidden_id.value == None  or form.hidden_id.value == "" %}
+        <div class="control-group {% if form.has_team.errors %}error{% endif %}">
+            <div class="controls">
+                {{ form.has_team }}<label for="id_has_team">{{ form.has_team.label }}</label>
+                <span class="help-inline">{{ form.has_team.errors }}</span>
+            </div>
+        </div>
+        {% endif %}
+        <div class="control-group {% if form.player_amount.errors %}error{% endif %}">
+            <div class="controls">
+                {{ form.player_amount }}
+                <span class="help-inline">{{ form.player_amount.errors }}</span>
+            </div>
+        </div>
+        <div class="control-group {% if form.price.errors %}error{% endif %}">
+            <div class="controls">
+                {{ form.price }}
+                <span class="help-inline">{{ form.price.errors }}</span>
+            </div>
+        </div>
+        <div class="control-group {% if form.slogan.errors %}error{% endif %}">
+            <div class="controls">
+                {{ form.slogan }}
+                <span class="help-inline">{{ form.slogan.errors }}</span>
+            </div>
+        </div>
+        <div class="control-group {% if form.gender.errors %}error{% endif %}">
+            <div class="controls">
+                {{ form.gender }}
+                <span class="help-inline">{{ form.gender.errors }}</span>
+            </div>
+        </div>
+        <div class="control-group {% if form.match_type.errors %}error{% endif %}">
+            <div class="controls">
+                {{ form.match_type }}
+                <span class="help-inline">{{ form.match_type.errors }}</span>
+            </div>
+        </div>
+        {{ form.hidden_id }}
+    </div>
+</form>
+
+<script type="text/javascript">
+    $(function() {
+        window.VENUE_SEARCH_URL = "{% url 'autocomplete_search' %}";
+        init_venue_auto_complete();
+        init_date_picker();
+      });
+</script>
+
+{% if not form.kick_off_date.errors and not form.kick_off_time.errors %}
+<script type="text/javascript">
+$(function() {
+    event_dialog_change_step();
+});
+</script>
+{% endif %}
+
+{% if pitch %}
+<script type="text/javascript">
+    window.VENUE_ID = {{ pitch.venue_id }};
+</script>
+{% endif %}

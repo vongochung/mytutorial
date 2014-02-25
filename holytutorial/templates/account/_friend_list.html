@@ -1,0 +1,32 @@
+{% load staticfiles i18n %}
+
+{% block content %}
+
+<div id="messages" class="notification">
+    {% if messages %}
+    <h2 class="grey-dark border-info">{% trans 'Pending requests' %}</h2>
+    {% for message in messages %}
+        {% include 'message/_notification.html' %}
+    {% endfor %}
+    {% endif %}
+</div>
+
+<h2 class="grey-dark clear">{% if fb and fb == True %}{% trans "Facebook friends" %}{% elif fb == False %}{% trans "WidooSport Friends" %}{% elif not fb%}{% trans "Participants" %}{% endif %}</h2>
+
+<div class="friends">
+	{% for friend in friends %}
+	   {% include "account/_friend.html" %}
+	{% endfor %}
+</div>
+<div class="next-friend">
+</div>
+<div class="clear">
+    {% if more_friend != False %}
+    	<div>
+    		<p id="load-see-more"></p>
+    	</div>
+        <button id="btn-more-friend" event-id="{{event_id}}" fb = "{% if fb == False or fb == True %}{{fb}}{% else %}None{% endif %}"  player-id="{{ profile_player.id }}"  class="btn btn-orange hide">{% trans "See more" %}</button>
+    {% endif %}
+</div>
+{% endblock %}
+

@@ -1,0 +1,137 @@
+{% extends "layout.html" %}
+
+{% load staticfiles i18n %}
+
+{% block head %}
+    <link href="{% static 'css/event.css' %}" rel="stylesheet">
+    <link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/hover-effects/style_common.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/hover-effects/style10.css' %}" />
+{% endblock %}
+
+{% block left_menu %}
+    <li data-url="{% url 'get_event_participants' event.id %}"><a id="left-menu-event-participant" class="active" href="#"><i class="icon-th"></i> {% trans "Participants" %}</a></li>
+    <li data-url="{% url 'get_event_wall_messages' event.id %}"><a id="left-menu-all-messages" href="#"><i class="icon-th"></i> {% trans "Wall" %}</a></li>
+    <li {% if not is_over %}data-url="/account/get_friend_list/{{current_user.id}}/{{ event.id }}"{% endif %}><a id="left-menu-invite-friend" href="#"><i class="icon-th"></i> {% trans "Invite Friend" %}</a></li>
+    <li {% if not is_over %}data-url="{% url 'get_dashboard_facebook' event.id %}"{% endif %}><a id="left-menu-facebook" href="#"><i class="icon-fb"></i> {% trans "Invite Facebook Friend" %}</a></li>
+{% endblock %}
+
+{% block content %}
+
+<div class="result-profile">
+    <div class="result-image" event-id="{{event.id}}" {% if current_user.id == event.player_id and not is_over %}edit-image-event="true"{% endif %}>
+        <a  href="#" title="">
+            <img  src="{{ event.image }}" alt="">
+        </a>
+    </div>
+
+    <div class="row-view-right">
+        <div class="result-name">
+            {{event.name}}
+            {% if current_user.id == event.player_id and not is_over  %}
+            <a href="#" id="btn-edit-event" class="btn btn-orange right" event-id="{{event.id}}">{% trans "Edit event info" %}</a>
+            {% endif %}
+
+            {% if event.participants <= event.player_amount and not is_over or task_join == 0 and not is_over %}
+            <button class="btn btn-danger right" id="btn-join-event" dialog-join="{% trans 'Do you want to join this event?' %}" dialog-leave="{% trans 'Are you sure to leave this event?' %}" event-id="{{ event.id }}" join-text="{% trans 'Join now' %}" leave-text="{% trans 'Leave' %}" task="{{task_join}}" >{% if task_join == 0 %} {% trans "Leave" %} {% elif task_join == 1 %} {% trans "Join now" %} {% endif %}</button>
+            {% endif %}
+
+        </div>
+
+        <a class="block" href="{% url 'venue_detail' event.venue_id %}"><i class="icon-map-marker"></i> {{ event.address }}</a>
+        <i class="block border-info">
+        {% if event.slogan %}
+        &#147; {{ event.slogan }} &#148;
+        {% endif %}
+        </i>
+
+        <ul class="left main">
+            <li><i class="icon-calendar"></i> {{ event.time }}</li>
+            {% if event.cost %}
+            <li><span class="cost">$</span> {{ event.cost }}</li>
+            {% endif %}
+            <li><i class="icon-user"></i> <span class="player-amount">{{event.participants}}/{{event.player_amount}}</span></li>
+        </ul>
+
+        <ul class="left">
+
+            <li><span class="sport-type">Sport: </span><span>{{event.sport}}</span></li>
+            <li><span class="pitch-name">Pitch: </span><span>{{event.pitch_name}}</span></li>
+            <li><span class="event-creator">Creator: </span><span><a class="tooltip-user" message-user-id="{{ event.player_id }}" href="{% url 'dashboard' event.player_id %}">{{creator}}</a></span></li>
+        </ul>
+
+        <div class="clear"></div>
+
+    </div>
+
+
+    <div class="clear"></div>
+
+
+
+
+    {% if my_profile %}
+    <button class="btn-delete-event" event="{{event.id}}">{% trans "Delete" %}</button>
+    {% endif %}
+</div>
+<div id="main-content" class="animated on-load bounceInUp">
+    {% include "event/_team_player.html" %}
+</div>
+
+<div id="create-event-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>{% trans "Create event" %}</h3>
+    </div>
+    <div id="create-event" class="modal-body">
+
+    </div>
+    <div class="modal-footer">
+        <button id="btn-next-event" class="btn">Next</button>
+        <button id="btn-save-event" class="btn hide">Save</button>
+    </div>
+</div>
+
+<div id="edit-image-event-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">{% trans "×" %}</button>
+        <h3 id="myModalLabel">{% trans "Edit Image Event" %}</h3>
+    </div>
+    <div id="edit-image-event" class="modal-body">
+
+    </div>
+</div>
+
+<div id="add-team-event-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-header">
+        <h3>{% trans "Add team" %}</h3>
+    </div>
+    <div id="add-team-event" class="modal-body">
+
+    </div>
+    <div class="modal-footer">
+        <button id="btn-save-team" class="btn">{% trans "Save" %}</button>
+    </div>
+</div>
+
+<div id="team-score-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">{% trans "×" %}</button>
+        <h3>{% trans "Update team score" %}</h3>
+    </div>
+    <div id="team-score" class="modal-body">
+
+    </div>
+    <div class="modal-footer">
+        <button id="btn-save-team-score" class="btn">{% trans "Save" %}</button>
+    </div>
+</div>
+
+{% endblock %}
+{% block js %}
+	<script src="{% static 'js/mygmap.js' %}"></script>
+	<script src="{% static 'js/event.js' %}"></script>
+    <script src="{% static 'js/dashboard.js' %}"></script>
+    <script src="{% static 'js/message.js' %}"></script>
+    <script src="{% static 'js/wall_message.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'email/email_template.html' %}
+
+{% load staticfiles i18n%}
+
+{% block icon %}
+<img  src="{{ default_url }}{% static 'images/icon-friends.png' %}" alt="" border="0" align="left" />
+{% endblock %}
+
+{% block title %}
+{% trans "Friend request" %}
+{% endblock %}
+
+{% block content %}
+{% trans content %}
+<br/>
+<a href="{{ default_url }}">{% trans "Login and see your friend" %}</a>
+{% endblock %}

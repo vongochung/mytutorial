@@ -1,0 +1,33 @@
+{% load i18n %}
+<div class="event-tooltip">
+
+    <h1 class="with-img">
+        <a href="{% url 'event_detail' event.id %}" title="">
+            <img src="{{ event.image }}" class="event-icon" alt="" />
+            <span>{{ event.name }}</span>
+        </a>
+        <a class="cancel-popover top right">x</a>
+    </h1>
+
+    <ul>
+        <li>Sport: <span>{{event.sport}}</span></li>
+        <li>Address: <span><a href="{% url 'venue_detail' event.venue_id %}">{{venue.location_name|truncatechars:65}}</a></span></li>
+        <li>Time: <span>{{event.time}}</span></li>
+        <li>Cost: <span>{{event.cost}}</span></li>
+        <li>Participants: <span>{{event.participants}}/{{event.player_amount}}</span></li>
+    </ul>
+
+    <p><i>{% trans "Do you want to join this event?" %}</i></p>
+
+    <select id="tooltip-teams">
+        <option value="0">{% trans "Please select a team!" %}</option>
+        {% for team in teams %}
+        <option value="{{team.id}}">{{team.name}}</option>
+        {% endfor %}
+    </select>
+
+    <p>
+        <button id="confirm-join-event" class="btn btn-orange btn-confirm" select-text ="{% trans 'Please select a team to join!' %}" friend-id="{{message.user.id}}" event-id="{{event.id}}" able-to-join="{{able_to_join}}" is-over="{{is_over}}" can-join="{{can_join}}", has-join="{{has_join}}" task="11" dialog-join="{% trans 'Do you want to join this event?' %}">{% trans "Join" %}</button>
+        <button class="btn btn-no-join cancel-popover" event-id="{{event.id}}" task="10" >{% trans "No" %}</button>
+    </p>
+</div>

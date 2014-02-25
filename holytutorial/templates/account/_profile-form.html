@@ -1,0 +1,58 @@
+{% block head %}
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+{% endblock %}
+
+ <form action="" name = "profile-form" id ="profile-form"  method="post" accept-charset="utf-8" class="form-inline">
+
+	 {{ form.non_field_errors }}
+
+	 {% csrf_token %}
+	 <div class="control-group {% if form.email.errors %}error{% endif %}">
+	    <div class="controls">
+	        {{ form.email }}
+	        <span class="help-inline">{{ form.email.errors }}</span>
+	    </div>
+	 </div>
+	 <div class="control-group {% if form.birth_date.errors %}error{% endif %}">
+	    <div class="controls">
+	        {{ form.birth_date }}
+	        <span class="help-inline">{{ form.birth_date.errors }}</span>
+	    </div>
+	 </div>
+	 <div class="control-group {% if form.first_name.errors %}error{% endif %}">
+	    <div class="controls">
+	        {{ form.first_name }}
+	        <span class="help-inline">{{ form.first_name.errors }}</span>
+	    </div>
+	 </div>
+	 <div class="control-group {% if form.last_name.errors %}error{% endif %}">
+	    <div class="controls">
+	        {{ form.last_name }}
+	        <span class="help-inline">{{ form.last_name.errors }}</span>
+	    </div>
+	 </div>
+    <div class="control-group {% if form.gender.errors %}error{% endif %}">
+        <div class="controls">
+            {{ form.gender }}
+            <span class="help-inline">{{ form.gender.errors }}</span>
+        </div>
+    </div>
+	<div class="control-group {% if form.phone.errors %}error{% endif %}">
+	    <div class="controls">
+	        {{ form.phone }}
+	        <span class="help-inline">{{ form.phone.errors }}</span>
+	    </div>
+	</div>
+	{{ form.hidden_id }}
+
+</form>
+{% block js %}
+    <script>
+		    $(function() {
+		    	$("#id_birth_date").datepicker({
+		        	dateFormat: "mm-dd-yy" ,
+		            maxDate: "d"
+		        });
+		    });
+    </script>
+{% endblock %}

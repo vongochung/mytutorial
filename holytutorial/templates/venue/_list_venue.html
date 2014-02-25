@@ -1,0 +1,67 @@
+{% load staticfiles i18n %}
+
+{% block content %}
+
+{% if not all %}
+
+<h2 class="grey-dark no-border">
+    {% if my_profile %}
+        {% trans "My venues" %}
+    {% elif is_favourite %}
+        {% trans "Favourite Venues" %}
+    {% else %}
+        {% trans "All venues" %}
+    {% endif %}
+    <button class="btn btn-orange right btn-create-venue">{% trans "Create Venue" %}</button>
+</h2>
+
+{% else %}
+    {% include 'venue/_map.html' %}
+    <div id="list-venue-map" class="list-map"></div>
+{% endif %}
+
+<div class="ws-list">
+
+{% for venue in venues %}
+    <div class="one-row" url="{% url 'venue_detail' venue.id %}" venue-name="{{venue.name}}" location-name="{{venue.location_name}}" latitude ="{{venue.latitude}}" longitude="{{venue.longitude}}" image="{{  venue.get_icon_pitch  }}">
+        <div class="result-image">
+            <a href="{% url 'venue_detail' venue.id %}">
+                <img  src="{{ venue.get_image }}" alt="">
+            </a>
+        </div>
+
+        <div class="row-view-right main">
+
+            <a class="result-name" href="{% url 'venue_detail' venue.id %}">
+                {{venue.name}}
+            </a>
+
+            {% if my_profile %}
+            <button class="btn-delete-venue btn btn-danger btn-mini" venue-id="{{venue.id}}" player-id="{{venue.player.id}}">{% trans "Delete" %}</button>
+            {% endif %}
+
+            <div class="block">
+                <i class="icon-map-marker"></i> {{ venue.location_name|truncatechars:65 }}
+            </div>
+            {% if venue.note %}
+            <i class="block">&#147; {{ venue.note }} &#148;</i>
+            {% endif %}
+
+        </div>
+
+        <div class="row-view-right info">
+            <ul>
+                <li>{% trans "Sport Type" %}: <span>{{ venue.covering }}</span></li>
+                <li>{% trans "Phone" %}: <span>{{ venue.phone }}</span></li>
+            </ul>
+        </div>
+
+        <div class="clear"></div>
+    </div>
+{% empty %}
+    <span class="no-result">No venue in your list</span>
+{% endfor %}
+
+</div>
+
+{% endblock %}

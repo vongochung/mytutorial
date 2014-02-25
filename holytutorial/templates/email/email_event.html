@@ -1,0 +1,21 @@
+{% extends 'email/email_template.html' %}
+
+{% load staticfiles i18n%}
+
+{% block icon %}
+    {% if type == 'escape' %}
+    <img  src="{{ default_url }}{% static 'images/icon-alert.png' %}" alt="" border="0" align="left" />
+    {% else %}
+    <img  src="{{ default_url }}{% static 'images/icon-events.png' %}" alt="" border="0" align="left" />
+    {% endif %}
+{% endblock %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+{{ content }}
+<br/>
+<a href="{{ default_url }}{{ event.get_url }}">{% trans "Click here to see the event" %}</a>
+{% endblock %}

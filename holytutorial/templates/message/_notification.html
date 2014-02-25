@@ -1,0 +1,7 @@
+<div class="msg message-type-{{ message.type }}" message-id="{{message.id}}">
+    <div class="content-panel">
+        <img class="profile-img small" src="{{ message.user.get_image_src }}" alt="" />
+        <div class="profile-mask with-border" message-type="{{message.type}}" message-id="{{message.id}}"></div>
+    </div>
+    <div class="box count">?</div>
+</div>

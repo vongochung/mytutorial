@@ -1,0 +1,26 @@
+{% load staticfiles i18n %}
+<form action="" id="change-pass-form" method="post" >
+		{% csrf_token %}
+	    <p>
+	    	{{ form.non_field_errors }}
+	    </p>
+        <div class="control-group {% if form.old_password.errors %}error{% endif %}">
+	    	<div class="controls">
+	       		{{ form.old_password }}
+	        	<span class="help-inline">{{ form.old_password.errors }}</span>
+	    	</div>
+	 	</div>
+	 	<div class="control-group {% if form.new_password.errors %}error{% endif %}">
+	    	<div class="controls">
+	       		{{ form.new_password }}
+	        	<span class="help-inline">{{ form.new_password.errors }}</span>
+	    	</div>
+	 	</div>
+	 	<div class="control-group {% if form.re_new_password.errors %}error{% endif %}">
+	    	<div class="controls">
+	       		{{ form.re_new_password }}
+	        	<span class="help-inline">{{ form.re_new_password.errors }}</span>
+	    	</div>
+	 	</div>
+</form>  
+    

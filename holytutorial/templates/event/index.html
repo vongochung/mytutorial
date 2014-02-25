@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% load staticfiles i18n %}
+
+{% block head %}
+    <link href="{% static 'css/event.css' %}" rel="stylesheet">
+
+{% endblock %}
+
+{% block left_menu %}
+    <li data-url="{% url 'get_all_events' %}" data-callback="init_map"><a id="left-menu-all-event" href="#" class="active"><i class="icon-th"></i> {% trans "In The Area" %}</a></li>
+    <li id="menu-my-events" data-url="{% url 'get_my_events' %}"><a id="left-menu-my-events" href="#" ><i class="icon-th"></i> {% trans "My Event" %}</a></li>
+{% endblock %}
+
+{% block content %}
+
+<div id="main-content">
+    {% include 'event/_map.html' %}
+    <div id="list-event-map" class="list-map">
+    </div>
+</div>
+<div id="create-event-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>{% trans "Create event" %}</h3>
+    </div>
+    <div id="create-event" class="modal-body">
+
+    </div>
+    <div class="modal-footer">
+        <button id="btn-next-event" class="btn" select-sport-text="{% trans 'You need to select sport type' %}">Next</button>
+        <button id="btn-save-event" class="btn hide">Save</button>
+    </div>
+</div>
+{% endblock %}
+{% block js %}
+<script src="{% static 'js/mygmap.js' %}"></script>
+<script src="{% static 'js/event.js' %}"></script>
+<script src="{% static 'js/dashboard.js' %}"></script>
+{% endblock %}

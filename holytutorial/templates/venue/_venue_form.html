@@ -1,0 +1,36 @@
+<form action="" name = "venue-form" id ="venue-form"  method="post" accept-charset="utf-8" class="form-inline">
+	 {{ form.non_field_errors }}
+
+	 {% csrf_token %}
+	<div class="control-group {% if form.name.errors %}error{% endif %}">
+		<div class="controls">
+	        {{ form.name }}
+	    	<span class="help-inline">{{ form.name.errors }}</span>
+	    </div>
+	</div>
+
+	<div class="control-group {% if form.phone.errors %}error{% endif %}">
+	    <div class="controls">
+	        {{ form.phone }}
+	        <span class="help-inline">{{ form.phone.errors }}</span>
+	    </div>
+	</div>
+    <div class="control-group {% if form.covering.errors %}error{% endif %}">
+        <div class="controls">
+            {{ form.covering }}
+            <span class="help-inline">{{ form.covering.errors }}</span>
+        </div>
+    </div>
+	<div class="control-group {% if form.note.errors %}error{% endif %}">
+	    <div class="controls">
+	        {{ form.note }}
+	        <span class="help-inline">{{ form.note.errors }}</span>
+	    </div>
+	 </div>
+    {% if form.hidden_id.value == '' %}
+	<div>
+		{% include 'venue/_sport.html' %}
+	</div>
+    {% endif %}
+    {{ form.hidden_id }}
+</form>

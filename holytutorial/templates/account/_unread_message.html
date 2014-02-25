@@ -1,0 +1,8 @@
+{% load staticfiles i18n %}
+<div id="messages">
+    {% for message in messages %}
+        {% include 'message/_message.html' %}
+    {% empty %}
+        <span class="no-result">No notification in your list</span>
+    {% endfor %}
+</div>

@@ -1,0 +1,43 @@
+{% load staticfiles i18n %}
+{% block content %}
+<h2 class="grey-dark no-border">
+    {% trans "Pitches" %}
+    <button id="btn-create-pitch" class ="btn btn-mini btn-orange"  venue="{{ venue.id }}" with-sport="venue-sport">{% trans "Create pitch" %}</button>
+</h2>
+
+<div class="ws-list">
+
+{% for pitch in pitches %}
+	<div class="one-row">
+
+        <div class="result-image">
+            <img src="{{ pitch.sport.icon }}" alt="">
+        </div>
+
+        <div class="row-view-right main">
+
+    		<span class="result-name">
+    	    	{{pitch.name}}
+    	    	{% if current_player.id == venue.player.id %}
+                <button id="btn-edit-pitch" class="btn btn-mini btn-orange" venue="{{ venue.id }}" pitch-id="{{ pitch.id }}">{% trans "Edit pitch" %}</button>
+                <button class="btn-delete-pitch btn btn-mini btn-danger" venue-id="{{ venue.id }}" pitch-id="{{ pitch.id }}" dialog-text="{% trans 'Are you sure to delete this pitch?. Be sure no event will be held in this pitch' %}" select-text="{% trans 'Please select a pitch first' %}">{% trans "Delete" %} </button>
+                {% endif %}
+    	    </span>
+
+            <ul class="info">
+                <li>Surface: <span>{{pitch.surface.name}}</span></li>
+                <li>Sport Name: <span>{{pitch.sport.name}}</span></li>
+            </ul>
+
+        </div>
+
+        <div class="clear"></div>
+
+	</div>
+{% empty %}
+    <span>No pitch in this Venue</span>
+{% endfor %}
+
+</div>
+
+{% endblock %}

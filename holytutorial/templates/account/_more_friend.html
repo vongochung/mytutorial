@@ -1,0 +1,6 @@
+{% load staticfiles i18n %}
+{% block content %}
+{% for friend in friends %}
+    {% include 'account/_friend.html' %}
+{% endfor %}
+{% endblock %}

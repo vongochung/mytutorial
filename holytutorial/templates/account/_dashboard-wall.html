@@ -1,0 +1,21 @@
+{% load staticfiles i18n %}
+<h2 class="grey-dark">{% trans "Newsfeed" %}</h2>
+
+<span class="span-message">
+    <p>{% trans "What's on your mind?" %}</p>
+    <button id="send-message-btn" data-wall-id="{{ profile_player.id }}" class="btn btn-mini right" wall-type="2">{% trans "Submit" %} </button>
+    <div class="control-group">
+        <textarea id="txt-new-message"></textarea><br/>
+    </div>
+</span>
+
+<div id="messages" class="clear">
+    {% for message in messages %}
+        {% include 'message/_message.html' %}
+    {% endfor %}
+    <div class="next-msg"></div>
+    {% if more_message != False %}
+    	 <button id="btn-more-message"  player-id="{{ profile_player.id }}"  class="btn btn-orange hide" wall-type="2">{% trans "See more" %}</button>
+    {% endif %}
+
+</div>

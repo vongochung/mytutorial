@@ -1,0 +1,30 @@
+{% load i18n %}
+
+<div class="player-tooltip">
+
+    <h1>
+        {{player}}
+        <span class="player-age">{%if age != 0 %}{{age}} years old{% endif %}</span>
+    </h1>
+
+
+    <div class="span-profile">
+        <div class="image-div">
+            <img class="profile-img large" src="{{ player.get_large_image_src }}" alt=""/>
+            <div class="profile-mask large white"></div>
+        </div>
+    </div>
+    <span class="sport_list">
+    {% for sport in player_sports %}
+    <button  class="btn small" ><img src="{{ sport.icon }}" alt="{{ sport.sport_name }}"/> {{ sport.num_matches }}</button>
+    {% endfor %}
+    </span>
+
+    <div class="clear"></div>
+    <div class="stats stats-bottom">
+        <span class="blue">{{ player.num_event }}</span> <span class="num-event b-r-dotted">{% trans "Events" %}</span>
+        <span class="blue">{{ player.num_following }}</span> <span class="num-following b-r-dotted">{% trans "Following" %}</span>
+        <span class="blue">{{ player.num_follower }}</span> <span class="num-follower b-r-dotted">{% trans "Follower" %}</span>
+        <span class="blue">{{ player.escaped_matches }}</span> <span class="num-escaped-matches">{% trans "Escape" %}</span>
+    </div>
+</div>

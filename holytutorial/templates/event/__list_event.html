@@ -1,0 +1,36 @@
+{% load staticfiles i18n %}
+
+
+<div class="ws-list">
+{% for event in events %}
+    <div class="one-row" url="{% url 'event_detail' event.id %}" event-name="{{event.name}}" location-name="{{event.address}}" latitude = "{{event.latitude}}" longitude="{{event.longitude}}" image="{{event.image}}" venue-name="{{ event.venue_name }}">
+        <div class="result-image">
+            <a href="{% url 'event_detail' event.id %}">
+                <img src="{{ event.image }}" alt="">
+            </a>
+        </div>
+
+        {% if my_profile.id == event.player_id %}
+        <button class="btn-delete-event btn btn-orange right" event-id="{{event.id}}" dialog-text="{% trans 'Are you sure to delete this event? All messages and info of this event will be deleted.' %}" >{% trans "Delete" %}</button>
+        {% endif %}
+
+        <div class="row-view-right main">
+            <a class="result-name" href="{% url 'event_detail' event.id %}">{{ event.name }}</a>
+            <a class="block" href="{% url 'venue_detail' event.venue_id %}"><i class="icon-map-marker"></i> {{ event.address }}</a>
+            <div class="block"><i class="icon-calendar"></i> {{ event.time }}</div>
+            {% if event.cost %}
+            <div><span class="cost">$</span> {{ event.cost }}</div>
+            {% endif %}
+        </div>
+
+        <ul class="row-view-right info">
+            <li>{% trans "Sport" %}: <span>{{ event.sport }}</span></li>
+            <li>{% trans "Pitch" %}: <span>{{ event.pitch_name }}</span></li>
+            <li>{% trans "Participants" %}: <span class="player-amount">{{ event.participants }}/{{event.player_amount}}</span></li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+{% empty %}
+    <span class="no-result">{% trans "No event available" %}</span>
+{% endfor %}
+</div>

@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% load staticfiles i18n%}
+
+{% block head %}
+    <link href="{% static 'css/home.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+{% block left_menu_container %}{% endblock %}
+
+<div class="row">
+    {% include 'home/_welcome.html' %}
+</div>
+
+
+
+{% endblock %}
+
+{% block js %}
+    {% if is_signup %}
+    <script type="text/javascript">
+        window.IS_SIGNUP = true
+    </script>
+    {% endif %}
+    <script type="text/javascript" src="{% static 'js/home.js' %}"></script>
+{% endblock %}

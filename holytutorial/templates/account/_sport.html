@@ -1,0 +1,5 @@
+<div id="{% if id %}{{ id }}{% else %}user_sport{% endif %}" class="sport_list">
+	{% for sport in sports %}
+    <button sport-id="{{ sport.id }}" class="btn btn-sport {% if my_sports %}{%if sport.id in my_sports %}active{% endif %}{% endif %}"><img src="{{ sport.icon }}" alt="{{ sport.name }}"/> {{ sport.name }}</button>
+	{% endfor %}
+</div>

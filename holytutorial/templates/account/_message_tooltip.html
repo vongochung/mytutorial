@@ -1,0 +1,17 @@
+{% load i18n %}
+<div class="message-tooltip">
+    <h1 class="friend-request with-img">
+        <a class="friend-name" href="{% url 'dashboard' player.id %}">
+            <img class="profile-img small" src="{{player.get_image_src}}" alt="" />
+            <div class="profile-mask"></div>
+            <span class="tooltip-user body-container" message-user-id="{{message.user.id}}">{{player}}</span>
+        </a>
+        <a class="cancel-popover top right">x</a>
+    </h1>
+    <p>{% trans "This user is following you." %}</p>
+    <p>{% trans "Do you want to follow him/her?" %}</p>
+    <p>
+        <button class="btn confirm-friend btn-confirm" friend="{{ message.user.id }}" is-friend="{{is_friend}}" task="11">{% trans "Yes" %}</button>
+        <button class="btn cancel-popover btn-no-friend" friend="{{message.user.id}}" task="10">{% trans "No" %}</button>
+    </p>
+</div>

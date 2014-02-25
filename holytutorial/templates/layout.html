@@ -1,0 +1,152 @@
+{% load staticfiles i18n %}
+{% load compress %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Holy.vo@likipe.se(Võ Ngọc Hưng)</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% compress css %}
+        <!-- Loading Bootstrap -->
+        <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+        <link href="{% static 'css/datepicker.css' %}" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/jquery-ui-1.10.3.css' %}" />
+
+        <!-- Loading Flat UI -->
+         <link href="/static/css/flat-ui.css" rel="stylesheet">
+        {% endcompress %}
+         <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+        <!--[if lt IE 9]>
+            <script src="{% static 'js/html5shiv.js' %}"></script>
+        <![endif]-->
+        {% compress css %}
+        <link href="{% static 'css/style.css' %}" rel="stylesheet">
+        <link href="{% static 'css/animate.min.css' %}" rel="stylesheet">
+        {% endcompress %}
+        {% compress js %}
+        <script src="{% static 'js/jquery-1.8.2.min.js' %}"></script>
+        {% endcompress %}
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true&hl=en"></script>
+        <script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
+        {% block head %}
+        {% endblock %}
+
+    </head>
+    <body class="{% if not current_user %}full{% endif %}">
+
+        <header id="header">
+            <div class="content">
+                <a id="home-link" href="/"><h1>holy.com</h1></a>
+                {% if current_user  %}
+
+                {% load is_current %}
+
+                <ul class="menu">
+                    <li><a href="#" class="home">{% trans "Trang chủ" %}</a></li>
+                    <li><a href="#" class="event">{% trans "Thông báo" %}</a></li>
+                    <li><a href="#" class="venue">{% trans "Giới thiệu" %}</a></li>
+                    <li><a class="search" href="#">{% trans "Tìm kiếm" %} <input name="search" id="txt-search" type="text" placeholder="Python,IOS,PHP,DATABASE ..."/></a></li>
+                </ul>
+
+                <div class="btn-group right">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <div class="animated fadeIn on-load">
+                            <img class="profile-img small" src="{{ current_user.get_image_src }}" alt="">
+                            <div class="profile-mask blue"></div>
+                            <span class="caret"></span>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a tabindex="-1" href="{% url 'set_lang' 'en' %}">
+                                <img src="{% static 'images/flag/en.png' %}" alt="">
+                                {% language 'en' %}
+                                    {% trans "English" %}
+                                {% endlanguage %}
+                            </a>
+                        </li>
+                        <li>
+                            <a tabindex="-1" href="{% url 'set_lang' 'fr' %}">
+                                <img src="{% static 'images/flag/fr.png' %}" alt="">
+                                {% language 'fr' %}
+                                    {% trans "French" %}
+                                {% endlanguage %}
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a tabindex="-1" href="{% url 'logout' %}">{% trans "Quit" %}</a></li>
+                    </ul>
+                </div>
+
+                {% endif %}
+            </div>
+        </header>
+
+        <div id="main">
+            {% block left_menu_container %}
+            <div class="menu left">
+
+                <ul class="list right" id="left-menu">
+                    {% block left_menu %}{% endblock %}
+                </ul>
+
+                <div class="sub right">
+                </div>
+
+            </div>
+            {% endblock %}
+
+
+            <div class="content">
+                {% block content %}{% endblock %}
+            </div>
+            <footer id="footer">
+                <ul class="menu">
+                	<li><a href="#">{% trans "User Agreement" %}</a></li>
+                	<li><a href="#">{% trans "Privacy Policy" %}</a></li>
+                	<li><a href="#">{% trans "Community Guidelines" %}</a></li>
+                	<li><a href="#">{% trans "Help Center" %}</a></li>
+                </ul>
+            </footer>
+        </div>
+
+        <div style="display:none">
+            <div class="loading">
+                <div class="block-1"></div>
+                <div class="block-2"></div>
+                <div class="block-3"></div>
+            </div>
+        </div>
+
+        <!-- Load JS here for greater good =============================-->
+        <script src="http://connect.facebook.net/en_US/all.js"></script>
+        {% compress js %}
+        <script src="{% static 'js/jquery-1.8.2.min.js' %}"></script>
+        <script src="{% static 'js/jquery-ui-1.10.0.custom.min.js' %}"></script>
+        <script src="{% static 'js/jquery-ui.js' %}"></script>
+        <script src="{% static 'js/jquery.dropkick-1.0.0.js' %}"></script>
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'js/custom_checkbox_and_radio.js' %}"></script>
+        <script src="{% static 'js/custom_radio.js' %}"></script>
+        <script src="{% static 'js/jquery.tagsinput.js' %}"></script>
+        <script src="{% static 'js/bootstrap-tooltip.js' %}"></script>
+        <script src="{% static 'js/jquery.placeholder.js' %}"></script>
+        <script src="{% static 'js/modernizr.min.js' %}"></script>
+        <script src="{% static 'js/functions.js' %}"></script>
+        <script src="{% static 'js/bootstrap-popover.js' %}"></script>
+        {% endcompress %}
+        <script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+        <script>
+            window.APPID = {{ FB_APPID }};
+            window.PAGE_SIZE = {{ PAGE_SIZE }};
+            window.PAGE_SIZE_FRIEND = {{ PAGE_SIZE_FRIEND }};
+        </script>
+        {% block js %}
+        {% endblock %}
+        <script type="text/javascript">
+            window.UPLOAD = "{% static 'images/upload' %}";
+        </script>
+    </body>
+
+</html>
